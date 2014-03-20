@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Pokerstars Guarantees</title>
+</head>
+<body>
+	<h1>Pokerstars guarantees</h1>
+	<p>Please note:</p>
+	<ul>
+		<li>Tournaments can have late registration - often the guarantee gets cracked in the late reg phase!</li>
+		<li>This list gets updated every 10 minutes.</li>
+		<li>No tournaments that have already begun, are in the list. If someone knows how to retrieve that data, please <a href="mailto:jonathanburger11@gmail.com">email me!</a></li>
+		<li>Tournaments with FPP buy-ins have been converted to dollars: 100FPP = $1</li>
+		<li>Bounty tournaments might get displayed wrong - the data Pokerstars provides does not include the bounty amount.</li>
+		<li>Same applies to Rebuy tournaments - rebuys don't get listed here!</li>
+	</ul>
+	<table>
+		<tr>
+			<th>Start</th>
+			<th>Name</th>
+			<th>Prizepool</th>
+			<th>Players</th>
+			<th>Prizepool generated <br>by players</th>
+			<th>Prizes added by Pokerstars</th>
+			<th>Go to tournament lobby</th>
+		</tr>
+		<% _.each(feed, function(tourney) { %>
+			<tr>
+				<td><%= moment(tourney.starts).from(moment()) %></td>
+				<td><%= tourney.name %></td>
+				<td><%= tourney.currency%><%= tourney.prizepool %></td>
+				<td><%= tourney.players %></td>
+				<td><%= tourney.currency%><%= Math.round(tourney.prizes_by_players*100)/100 %></td>
+				<td><%= tourney.currency%><%= tourney.added_by_ps %></td>
+				<td><a href="pokerstars://tournament/<%= tourney.id %>">Click here</a></td>
+			</tr>
+		<% }); %>
+	</table>
+	<style>
+		td, th {
+			max-width: 300px;
+			padding: 10px;
+			text-align: left;
+		}
+	</style>
+</body>
+</html>
